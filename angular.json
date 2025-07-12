@@ -10,7 +10,11 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "fileSuffix": "Component"
+        },
+        "@schematics/angular:interface": {
+          "prefix": "I"
         }
       },
       "root": "",

@@ -1,0 +1,92 @@
+<div class="auth-page">
+  <div class="container">
+    <div class="auth-card">
+      <div class="auth-card__header">
+        <h1 class="auth-card__title">Create Account</h1>
+        <p class="auth-card__subtitle">Join us and start managing your todos</p>
+      </div>
+
+      <form class="auth-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="auth-form__group">
+          <label for="name" class="auth-form__label">Full Name</label>
+          <input 
+            type="text" 
+            id="name"
+            class="auth-form__input" 
+            formControlName="name"
+            placeholder="Enter your full name"
+            [class.auth-form__input--error]="nameControl?.invalid && nameControl?.touched"
+          >
+          <div class="auth-form__error" *ngIf="nameControl?.invalid && nameControl?.touched">
+            {{ getErrorMessage('name') }}
+          </div>
+        </div>
+
+        <div class="auth-form__group">
+          <label for="email" class="auth-form__label">Email</label>
+          <input 
+            type="email" 
+            id="email"
+            class="auth-form__input" 
+            formControlName="email"
+            placeholder="Enter your email"
+            [class.auth-form__input--error]="emailControl?.invalid && emailControl?.touched"
+          >
+          <div class="auth-form__error" *ngIf="emailControl?.invalid && emailControl?.touched">
+            {{ getErrorMessage('email') }}
+          </div>
+        </div>
+
+        <div class="auth-form__group">
+          <label for="password" class="auth-form__label">Password</label>
+          <input 
+            type="password" 
+            id="password"
+            class="auth-form__input" 
+            formControlName="password"
+            placeholder="Enter your password"
+            [class.auth-form__input--error]="passwordControl?.invalid && passwordControl?.touched"
+          >
+          <div class="auth-form__error" *ngIf="passwordControl?.invalid && passwordControl?.touched">
+            {{ getErrorMessage('password') }}
+          </div>
+        </div>
+
+        <div class="auth-form__group">
+          <label for="confirmPassword" class="auth-form__label">Confirm Password</label>
+          <input 
+            type="password" 
+            id="confirmPassword"
+            class="auth-form__input" 
+            formControlName="confirmPassword"
+            placeholder="Confirm your password"
+            [class.auth-form__input--error]="confirmPasswordControl?.invalid && confirmPasswordControl?.touched"
+          >
+          <div class="auth-form__error" *ngIf="confirmPasswordControl?.invalid && confirmPasswordControl?.touched">
+            {{ getErrorMessage('confirmPassword') }}
+          </div>
+        </div>
+
+        <div class="auth-form__error" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <button 
+          type="submit" 
+          class="btn btn--primary auth-form__submit"
+          [disabled]="isLoading || registerForm.invalid"
+        >
+          <span *ngIf="!isLoading">Create Account</span>
+          <span *ngIf="isLoading">Creating Account...</span>
+        </button>
+      </form>
+
+      <div class="auth-card__footer">
+        <p class="auth-card__text">
+          Already have an account? 
+          <a routerLink="/auth/login" class="auth-card__link">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

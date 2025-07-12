@@ -1,0 +1,80 @@
+<div class="home">
+  <div class="container">
+    <!-- Header -->
+    <header class="home__header">
+      <h1 class="home__title">Todo App</h1>
+      <div class="home__user-info" *ngIf="currentUser">
+        <span class="home__user-name">Welcome, {{ currentUser.name }}</span>
+        <button class="btn btn--secondary" (click)="logout()">Logout</button>
+      </div>
+    </header>
+
+    <!-- Login prompt -->
+    <div class="home__login-prompt" *ngIf="!currentUser">
+      <div class="home__login-message">
+        <h2>Welcome to Todo App</h2>
+        <p>Please log in to manage your todos</p>
+        <div class="home__login-actions">
+          <a routerLink="/auth/login" class="btn btn--primary">Login</a>
+          <a routerLink="/auth/register" class="btn btn--secondary">Register</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Todo section -->
+    <div class="home__todo-section" *ngIf="currentUser">
+      <!-- Add todo form -->
+      <div class="todo-form">
+        <div class="todo-form__group">
+          <input 
+            type="text" 
+            class="todo-form__input" 
+            placeholder="What needs to be done?"
+            [(ngModel)]="newTodoTitle"
+            (keyup.enter)="addTodo()"
+          >
+          <button class="btn btn--primary todo-form__button" (click)="addTodo()">
+            Add Todo
+          </button>
+        </div>
+      </div>
+
+      <!-- Todo list -->
+      <div class="todo-list" *ngIf="todos.length > 0">
+        <div class="todo-list__header">
+          <h3>Your Todos ({{ todos.length }})</h3>
+        </div>
+        
+        <div class="todo-list__items">
+          <div 
+            class="todo-item" 
+            *ngFor="let todo of todos"
+            [class.todo-item--completed]="todo.completed"
+          >
+            <div class="todo-item__content">
+              <input 
+                type="checkbox" 
+                class="todo-item__checkbox"
+                [checked]="todo.completed"
+                (change)="toggleTodo(todo)"
+              >
+              <span class="todo-item__title">{{ todo.title }}</span>
+              <span class="todo-item__date">{{ todo.createdAt | date:'short' }}</span>
+            </div>
+            <button 
+              class="btn btn--danger todo-item__delete"
+              (click)="deleteTodo(todo.id)"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div class="home__empty-state" *ngIf="todos.length === 0">
+        <p>No todos yet. Add your first todo above!</p>
+      </div>
+    </div>
+  </div>
+</div>

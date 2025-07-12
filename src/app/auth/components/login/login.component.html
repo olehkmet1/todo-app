@@ -1,0 +1,65 @@
+<div class="auth-page">
+  <div class="container">
+    <div class="auth-card">
+      <div class="auth-card__header">
+        <h1 class="auth-card__title">Welcome Back</h1>
+        <p class="auth-card__subtitle">Sign in to your account</p>
+      </div>
+
+      <form class="auth-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="auth-form__group">
+          <label for="email" class="auth-form__label">Email</label>
+          <input 
+            type="email" 
+            id="email"
+            class="auth-form__input" 
+            formControlName="email"
+            placeholder="Enter your email"
+            [class.auth-form__input--error]="emailControl?.invalid && emailControl?.touched"
+          >
+          <div class="auth-form__error" *ngIf="emailControl?.invalid && emailControl?.touched">
+            {{ getErrorMessage('email') }}
+          </div>
+        </div>
+
+        <div class="auth-form__group">
+          <label for="password" class="auth-form__label">Password</label>
+          <input 
+            type="password" 
+            id="password"
+            class="auth-form__input" 
+            formControlName="password"
+            placeholder="Enter your password"
+            [class.auth-form__input--error]="passwordControl?.invalid && passwordControl?.touched"
+          >
+          <div class="auth-form__error" *ngIf="passwordControl?.invalid && passwordControl?.touched">
+            {{ getErrorMessage('password') }}
+          </div>
+        </div>
+
+        <div class="auth-form__error" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <button 
+          type="submit" 
+          class="btn btn--primary auth-form__submit"
+          [disabled]="isLoading || loginForm.invalid"
+        >
+          <span *ngIf="!isLoading">Sign In</span>
+          <span *ngIf="isLoading">Signing In...</span>
+        </button>
+      </form>
+
+      <div class="auth-card__footer">
+        <a routerLink="/auth/forgot-password" class="auth-card__link">
+          Forgot your password?
+        </a>
+        <p class="auth-card__text">
+          Don't have an account? 
+          <a routerLink="/auth/register" class="auth-card__link">Sign up</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

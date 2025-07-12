@@ -1,0 +1,231 @@
+.home {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px 0;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &__title {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  &__user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__user-name {
+    color: white;
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+
+  &__login-prompt {
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  &__login-message {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    margin: 0 auto;
+
+    h2 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 2rem;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+  }
+
+  &__login-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+  }
+
+  &__todo-section {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  &__empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    font-size: 1.1rem;
+  }
+}
+
+.todo-form {
+  margin-bottom: 30px;
+
+  &__group {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+
+  &__input {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+    &:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+  }
+
+  &__button {
+    white-space: nowrap;
+  }
+}
+
+.todo-list {
+  &__header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+
+    h3 {
+      color: #333;
+      font-size: 1.3rem;
+      margin: 0;
+    }
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  &--completed {
+    opacity: 0.7;
+    border-left-color: #28a745;
+
+    .todo-item__title {
+      text-decoration: line-through;
+      color: #666;
+    }
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+  }
+
+  &__checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #667eea;
+  }
+
+  &__title {
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 500;
+    flex: 1;
+  }
+
+  &__date {
+    color: #666;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  &__delete {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .home {
+    padding: 15px 0;
+
+    &__header {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+    }
+
+    &__title {
+      font-size: 2rem;
+    }
+
+    &__user-info {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  .todo-form {
+    &__group {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  .todo-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+
+    &__content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    &__delete {
+      align-self: flex-end;
+    }
+  }
+}
