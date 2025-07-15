@@ -37,20 +37,20 @@ export class ForgotPasswordComponent implements OnInit {
     if (this.forgotPasswordForm.valid) {
       this.isLoading = true;
       this.errorMessage = '';
-      this.successMessage = '';
+      // this.successMessage = '';
 
-      const request: IForgotPasswordRequest = this.forgotPasswordForm.value;
+      // const request: IForgotPasswordRequest = this.forgotPasswordForm.value;
 
-      this.authService.forgotPassword(request).subscribe({
-        next: (response) => {
-          this.isLoading = false;
-          this.successMessage = response.message || 'Password reset email sent successfully!';
-        },
-        error: (error) => {
-          this.isLoading = false;
-          this.errorMessage = error.error?.message || 'Failed to send reset email. Please try again.';
-        }
-      });
+      // this.authService.forgotPassword(request).subscribe({
+      //   next: (response) => {
+      //     this.isLoading = false;
+      //     this.successMessage = response.message || 'Password reset email sent successfully!';
+      //   },
+      //   error: (error) => {
+      //     this.isLoading = false;
+      //     this.errorMessage = error.error?.message || 'Failed to send reset email. Please try again.';
+      //   }
+      // });
     } else {
       this.markFormGroupTouched();
     }

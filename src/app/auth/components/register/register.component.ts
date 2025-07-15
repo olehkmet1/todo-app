@@ -42,7 +42,9 @@ export class RegisterComponent implements OnInit {
       this.isLoading = true;
       this.errorMessage = '';
 
-      const registerData: IRegisterRequest = this.registerForm.value;
+      // Only send name, email, and password to the backend
+      const { name, email, password } = this.registerForm.value;
+      const registerData: IRegisterRequest = { name, email, password };
 
       this.authService.register(registerData).subscribe({
         next: () => {
@@ -60,6 +62,12 @@ export class RegisterComponent implements OnInit {
 
   getErrorMessage(controlName: string): string {
     const control = this.registerForm.get(controlName);
+    
+    // Special handling for confirmPassword to check form-level password mismatch
+    if (controlName === 'confirmPassword' && this.registerForm.errors?.['passwordMismatch']) {
+      return 'Passwords do not match.';
+    }
+    
     if (control) {
       return AuthValidators.getErrorMessage(control, this.getFieldDisplayName(controlName));
     }

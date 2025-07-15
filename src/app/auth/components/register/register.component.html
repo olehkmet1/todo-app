@@ -60,9 +60,9 @@
             class="auth-form__input" 
             formControlName="confirmPassword"
             placeholder="Confirm your password"
-            [class.auth-form__input--error]="confirmPasswordControl?.invalid && confirmPasswordControl?.touched"
+            [class.auth-form__input--error]="(confirmPasswordControl?.invalid && confirmPasswordControl?.touched) || registerForm.errors?.['passwordMismatch']"
           >
-          <div class="auth-form__error" *ngIf="confirmPasswordControl?.invalid && confirmPasswordControl?.touched">
+          <div class="auth-form__error" *ngIf="(confirmPasswordControl?.invalid && confirmPasswordControl?.touched) || registerForm.errors?.['passwordMismatch']">
             {{ getErrorMessage('confirmPassword') }}
           </div>
         </div>

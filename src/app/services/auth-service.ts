@@ -13,7 +13,7 @@ import {
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly API_URL = 'http://localhost:3000/api'; // Adjust this to your backend URL
+  private readonly API_URL = 'http://localhost:3000'; // Adjust this to your backend URL
   private readonly TOKEN_KEY = 'auth_token';
   private readonly USER_KEY = 'auth_user';
 
@@ -55,9 +55,9 @@ export class AuthService {
       );
   }
 
-  // Forgot password
-  forgotPassword(email: IForgotPasswordRequest): Observable<{ message: string }> {
-    return this.http.post<{ message: string }>(`${this.API_URL}/auth/forgot-password`, email);
+  // Get user profile from backend
+  getProfile(): Observable<IUser> {
+    return this.http.get<IUser>(`${this.API_URL}/auth/profile`);
   }
 
   // Logout
@@ -65,14 +65,6 @@ export class AuthService {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
     this.currentUserSubject.next(null);
-  }
-
-  // Refresh token (if needed)
-  refreshToken(): Observable<IAuthResponse> {
-    return this.http.post<IAuthResponse>(`${this.API_URL}/auth/refresh`, {})
-      .pipe(
-        tap(response => this.handleAuthSuccess(response))
-      );
   }
 
   // Private methods

@@ -52,18 +52,21 @@ export class AuthValidators {
    * Password confirmation validator
    */
   static passwordMatchValidator(passwordControlName: string): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (!control.value) {
-        return null; // Let required validator handle empty values
-      }
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      const passwordControl = formGroup.get(passwordControlName);
+      const confirmPasswordControl = formGroup.get('confirmPassword');
 
-      const passwordControl = control.parent?.get(passwordControlName);
-      if (!passwordControl) {
+      if (!passwordControl || !confirmPasswordControl) {
         return null;
       }
 
       const password = passwordControl.value;
-      const confirmPassword = control.value;
+      const confirmPassword = confirmPasswordControl.value;
+
+      // Only validate if both fields have values
+      if (!password || !confirmPassword) {
+        return null;
+      }
 
       return password === confirmPassword ? null : { passwordMismatch: true };
     };
